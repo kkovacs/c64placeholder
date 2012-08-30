@@ -4,7 +4,7 @@ var text_em = $("#screen pre");
 
 // Helper function to add text to the screen.
 function addtext(text) {
-	text_em.html(text_em.html() + text);
+	text_em.text(text_em.text() + text);
 }
 
 // Main "loop".
@@ -19,6 +19,15 @@ function cursor() {
 		setTimeout(cursor,1000);
 	} else {
 		screen_em.addClass("hascursor");
+
+		// Explode the string into an array. (BTW, only IE actually needs this.)
+		if (_.isString(mytext[0])) {
+			var arr = [];
+			for (var i = 0; i < mytext[0].length; i++) {
+				arr.push(mytext[0][i]);
+			}
+			mytext[0] = arr;
+		}
 
 		// Get next char
 		var char = _.first(mytext[0]);
